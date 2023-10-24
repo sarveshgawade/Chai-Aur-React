@@ -29,7 +29,7 @@ function App() {
 
   },[length,numAllowed,charAllowed,setPassword])
 
-// useRef Hook
+
   // useEffect Hook
   useEffect(()=>{
     generatePassword()
