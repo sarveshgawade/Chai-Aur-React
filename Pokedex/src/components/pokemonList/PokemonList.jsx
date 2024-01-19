@@ -46,7 +46,7 @@ function PokemonList() {
             {
                 isLoading ? 
                     'loading data': 
-                    pokemonList.map((p)=> <Pokemon name={p.name} key={p.id} image={p.image}/>)
+                    pokemonList.map((p)=> <Pokemon name={p.name} key={p.id} image={p.image} id={p.id} />)
 
             }
         </div> 

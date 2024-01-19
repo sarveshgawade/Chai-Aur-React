@@ -6,7 +6,6 @@ import PokemonList from '../pokemonList/PokemonList'
 function Pokedex() {
   return (
     <div className='flex items-center flex-col mt-10 gap-10 '>
-      <h1 className='text-6xl'>Pokedex</h1>
       <Search/>
       <PokemonList/>
     </div>
