@@ -35,14 +35,24 @@ function PokemonList() {
     },[])
 
   return (
-    <div>
-        <div>List of Pokemons</div>
-        {
-            isLoading ? 
-                'loading data': 
-                pokemonList.map((p)=> <Pokemon name={p.name} key={p.id} image={p.image}/>)
+    <div className='flex flex-col items-center'>
+        <div className='flex flex-row flex-wrap justify-evenly'>
+            {
+                isLoading ? 
+                    'loading data': 
+                    pokemonList.map((p)=> <Pokemon name={p.name} key={p.id} image={p.image}/>)
 
-        }
+            }
+        </div> 
+        <div className='mt-11 mb-8 flex gap-5'>
+            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                Previous
+            </button>
+
+            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                Next
+            </button>
+        </div>
     </div>
   )
 }
