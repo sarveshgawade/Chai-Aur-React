@@ -6,13 +6,19 @@ function PokemonList() {
 
     const [pokemonList,setPokemonList] = useState([])
     const [isLoading,setisLoading] = useState(true)
-
-    const POKEDEX_URL = 'https://pokeapi.co/api/v2/pokemon'
+    const [nextUrl,setNextUrl] = useState('')
+    const [prevUrl,setPrevUrl] = useState('')
+    const [pokedexUrl,setpokedexUrl] = useState('https://pokeapi.co/api/v2/pokemon')
 
     async function downloadPokemons(){
-        const response = await axios.get(POKEDEX_URL)
+        setisLoading(true)
+        const response = await axios.get(pokedexUrl)
+        setNextUrl(response.data.next)
+        setPrevUrl(response.data.previous)
         const pokemonResultArray = response.data.results
+        // console.log(response.data.prev);
         const pokemonResultPromise = pokemonResultArray.map((item)=> axios.get(item.url))
+        
         const pokemonData = await axios.all(pokemonResultPromise)
         const eachPokemonArray = pokemonData.map((item)=>{
             const pokemon = item.data 
@@ -32,7 +38,7 @@ function PokemonList() {
 
     useEffect(()=>{
         downloadPokemons()
-    },[])
+    },[pokedexUrl])
 
   return (
     <div className='flex flex-col items-center'>
@@ -45,11 +51,19 @@ function PokemonList() {
             }
         </div> 
         <div className='mt-11 mb-8 flex gap-5'>
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            <button 
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                onClick={()=> setpokedexUrl(prevUrl)}
+                disabled={prevUrl == null }
+            >
                 Previous
             </button>
 
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            <button 
+                className=" bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                onClick={() => setpokedexUrl(nextUrl)}
+                disabled={nextUrl == null }
+            >
                 Next
             </button>
         </div>
