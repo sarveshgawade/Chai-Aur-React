@@ -4,6 +4,7 @@ import Pokemon from '../pokemon/Pokemon'
 
 function PokemonList() {
 
+    // NORMAL USE STATE
     // const [pokemonList,setPokemonList] = useState([])
     // const [isLoading,setisLoading] = useState(true)
     // const [nextUrl,setNextUrl] = useState('')
